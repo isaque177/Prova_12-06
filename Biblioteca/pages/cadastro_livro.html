@@ -3,72 +3,279 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Página Dinâmica com Tailwind</title>
+  <title>Cadastro de Livros - Sistema Biblioteca</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100 min-h-screen">
 
   <!-- Menu de Navegação -->
-  <nav class="bg-gray-800 p-4">
+  <nav class="bg-blue-800 p-4 shadow-lg">
     <div class="container mx-auto flex justify-between items-center">
-      <a class="text-white font-bold text-xl" href="#">Meu Site</a>
+      <a class="text-white font-bold text-xl" href="#">📚 Sistema Biblioteca</a>
       <div>
-        <a class="text-gray-300 hover:text-white mx-2" href="#">Início</a>
+        <a class="text-blue-200 hover:text-white mx-3 px-3 py-2 rounded transition" href="cadastro_bibliotecario.html">Bibliotecários</a>
+        <a class="text-white bg-blue-600 px-3 py-2 rounded" href="#">Livros</a>
       </div>
     </div>
   </nav>
-  <!--Formulario de Cadastro-->
+
+  <!-- Formulário de Cadastro -->
   <div class="container mx-auto mt-8 p-4">
-    <h2 class="text-2xl font-bold mb-4">Formulário Cadastro de livro</h2>
-    <form id="formCadastro" class="bg-white shadow-md rounded p-4" onsubmit="cadastrar()">
-      <div class="mb-4">
-        <label for="titulo" class="block text-gray-700 font-bold mb-2">titulo</label>
-        <input type="text" id="titulo" class="w-full px-3 py-2 border rounded" required>
+    <h2 class="text-3xl font-bold mb-6 text-gray-800">📖 Cadastro de Livros</h2>
+    <form id="formCadastro" class="bg-white shadow-lg rounded-lg p-6" onsubmit="cadastrar()">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="mb-4">
+          <label for="titulo" class="block text-gray-700 font-bold mb-2">Título *</label>
+          <input type="text" id="titulo" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" required>
+        </div>
+
+        <div class="mb-4">
+          <label for="autor" class="block text-gray-700 font-bold mb-2">Autor *</label>
+          <input type="text" id="autor" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" required>
+        </div>
+
+        <div class="mb-4">
+          <label for="genero" class="block text-gray-700 font-bold mb-2">Gênero *</label>
+          <select id="genero" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" required>
+            <option value="">Selecione um gênero</option>
+            <option value="Ficção">Ficção</option>
+            <option value="Não-ficção">Não-ficção</option>
+            <option value="Romance">Romance</option>
+            <option value="Fantasia">Fantasia</option>
+            <option value="Ficção Científica">Ficção Científica</option>
+            <option value="Terror">Terror</option>
+            <option value="Biografia">Biografia</option>
+            <option value="História">História</option>
+            <option value="Literatura Brasileira">Literatura Brasileira</option>
+            <option value="Infantil">Infantil</option>
+            <option value="Técnico">Técnico</option>
+            <option value="Autoajuda">Autoajuda</option>
+          </select>
+        </div>
+
+        <div class="mb-4">
+          <label for="bibliotecario" class="block text-gray-700 font-bold mb-2">Bibliotecário Responsável *</label>
+          <select id="bibliotecario" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" required>
+            <option value="">Carregando...</option>
+          </select>
+        </div>
+
+        <div class="mb-4 md:col-span-2">
+          <label for="status" class="block text-gray-700 font-bold mb-2">Status</label>
+          <select id="status" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
+            <option value="DISPONIVEL">Disponível</option>
+            <option value="EMPRESTADO">Emprestado</option>
+            <option value="MANUTENCAO">Em Manutenção</option>
+            <option value="RESERVADO">Reservado</option>
+          </select>
+        </div>
       </div>
-      
 
-       <div class="mb-4">
-        <label for="Gênero" class="block text-gray-700 font-bold mb-2">genero</label>
-        <input type="genero" id="genero" class="w-full px-3 py-2 border rounded" required>
-      </div>
-
-       <div class="mb-4">
-        <label for="Bibliotecário" class="block text-gray-700 font-bold mb-2">bibliotecario</label>
-        <input type="bibliotecario" id="bibliotecario" class="w-full px-3 py-2 border rounded" required>
-      </div>
-
-
-
-       <div class="mb-4">
-        <label for="Autor" class="block text-gray-700 font-bold mb-2">autor</label>
-        <input type="autor" id="autor" class="w-full px-3 py-2 border rounded" required>
-      </div>
-
-      <button type="submit"  class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Adicionar</button>
+      <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold px-6 py-3 rounded-lg transition duration-200 shadow-md">
+        📚 Cadastrar Livro
+      </button>
     </form>
-    <!--Tabela de Cadastro-->
-    <h2 class="text-2xl font-bold mt-8 mb-4">Tabela de Cadastros</h2>
-    <table  class="w-full table-auto bg-white shadow-md rounded">
-      <thead class="bg-gray-200">
-        <tr>
-          <th class="px-4 py-2">titulo</th>
-          <th class="px-4 py-2">genero</th>
-          <th class="px-4 py-2">bibliotecario</th>
-          <th class="px-4 py-2">autor</th>
-          <th class="px-4 py-2">Ação</th>
-        </tr>
-      </thead>
-      <tbody id="tabelaCorpo">
-        <!-- Linhas dinâmicas aqui -->
-      </tbody>
-    </table>
+
+    <!-- Tabela de Livros -->
+    <h2 class="text-2xl font-bold mt-8 mb-4 text-gray-800">📋 Livros Cadastrados</h2>
+    <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+      <table class="w-full table-auto">
+        <thead class="bg-blue-50">
+          <tr>
+            <th class="px-4 py-3 text-left font-semibold text-gray-700">ID</th>
+            <th class="px-4 py-3 text-left font-semibold text-gray-700">Título</th>
+            <th class="px-4 py-3 text-left font-semibold text-gray-700">Gênero</th>
+            <th class="px-4 py-3 text-left font-semibold text-gray-700">Bibliotecário</th>
+            <th class="px-4 py-3 text-left font-semibold text-gray-700">Autor</th>
+            <th class="px-4 py-3 text-left font-semibold text-gray-700">Status</th>
+            <th class="px-4 py-3 text-left font-semibold text-gray-700">Ações</th>
+          </tr>
+        </thead>
+        <tbody id="tabelaCorpo" class="divide-y divide-gray-200">
+          <!-- Linhas dinâmicas aqui -->
+        </tbody>
+      </table>
+    </div>
   </div>
-    <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  
-  <!--Adicionando Noditificação-->
+
+  <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  
-  <!--Meu Script da pagina-->
-  <script src="./assents/js/index2.js"></script>
+  <script>
+    // Carrega os dados ao carregar a página
+document.addEventListener('DOMContentLoaded', function() {
+    carregarLivros();
+    carregarBibliotecarios();
+});
+
+// API GET - Carregar livros
+function carregarLivros() {
+    fetch('http://localhost:8080/api/livros', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    })
+    .then(response => response.json())
+    .then(data => {
+        addLinhaLivros(data);
+    })
+    .catch(error => {
+        console.log('Erro ao carregar livros:', error);
+    });
+}
+
+// Carregar bibliotecários para o select
+function carregarBibliotecarios() {
+    fetch('http://localhost:8080/api/bibliotecario', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    })
+    .then(response => response.json())
+    .then(data => {
+        preencherSelectBibliotecarios(data);
+    })
+    .catch(error => {
+        console.log('Erro ao carregar bibliotecários:', error);
+    });
+}
+
+// Preencher select de bibliotecários
+function preencherSelectBibliotecarios(bibliotecarios) {
+    const select = document.getElementById('bibliotecario');
+    select.innerHTML = '<option value="">Selecione um bibliotecário</option>';
+    
+    bibliotecarios.forEach(bib => {
+        const option = document.createElement('option');
+        option.value = bib.id;
+        option.textContent = bib.nome;
+        select.appendChild(option);
+    });
+}
+
+// Adicionar linhas na tabela de livros
+function addLinhaLivros(dadosAPI) {
+    const tabela = document.getElementById('tabelaCorpo');
+    tabela.innerHTML = ''; // Limpa a tabela antes de adicionar
+    
+    dadosAPI.forEach(element => {   
+        const linha = document.createElement('tr');
+        linha.innerHTML = `
+            <td class="px-4 py-2">${element.id}</td>
+            <td class="px-4 py-2">${element.titulo}</td>
+            <td class="px-4 py-2">${element.genero}</td>
+            <td class="px-4 py-2">${element.bibliotecario ? element.bibliotecario.nome : 'Não atribuído'}</td>
+            <td class="px-4 py-2">${element.autor}</td>
+            <td class="px-4 py-2">
+                <span class="px-2 py-1 rounded text-xs font-semibold
+                    ${element.status === 'DISPONIVEL' ? 'bg-green-100 text-green-800' : 
+                      element.status === 'EMPRESTADO' ? 'bg-yellow-100 text-yellow-800' : 
+                      element.status === 'MANUTENCAO' ? 'bg-red-100 text-red-800' : 
+                      'bg-blue-100 text-blue-800'}">
+                    ${element.status || 'DISPONIVEL'}
+                </span>
+            </td>
+            <td class="px-4 py-2">
+                <button class="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600" 
+                        onclick="remover(${element.id})">Remover</button>
+            </td>
+        `;
+        tabela.appendChild(linha);
+    });
+}
+
+// Cadastrar novo livro
+function cadastrar() {
+    event.preventDefault();
+
+    const titulo = document.getElementById('titulo').value;
+    const genero = document.getElementById('genero').value;
+    const bibliotecarioId = document.getElementById('bibliotecario').value;
+    const autor = document.getElementById('autor').value;
+    const status = document.getElementById('status').value || 'DISPONIVEL';
+
+    if (titulo && genero && autor && bibliotecarioId) {
+        const livroData = {
+            titulo: titulo.trim(),
+            genero: genero.trim(),
+            autor: autor.trim(),
+            status: status,
+            dataCadastro: new Date().toISOString().split('T')[0],
+            bibliotecario: {
+                id: parseInt(bibliotecarioId)
+            }
+        };
+
+        // API POST  
+        fetch('http://localhost:8080/api/livros', { 
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(livroData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("Resposta da API:", data);
+            // Limpar campos
+            document.getElementById('titulo').value = "";
+            document.getElementById('genero').value = "";
+            document.getElementById('bibliotecario').value = "";
+            document.getElementById('autor').value = "";
+            document.getElementById('status').value = "DISPONIVEL";
+            
+            // Recarregar a lista
+            carregarLivros();
+            
+            Swal.fire({
+                icon: 'success',
+                title: 'Sucesso!',
+                text: 'Livro cadastrado com sucesso'
+            });
+        })
+        .catch(error => {
+            console.error("Erro ao enviar dados:", error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Erro!',
+                text: 'Erro ao cadastrar livro'
+            });
+        });
+    } else {
+        Swal.fire({
+            icon: 'error',
+            title: 'Erro!',
+            text: 'Preencha todos os campos obrigatórios'
+        });
+    }
+}
+
+// Remover livro
+function remover(id) {
+    Swal.fire({
+        icon: 'question',
+        title: 'Você tem certeza?',
+        text: 'Esta ação não pode ser desfeita!',
+        showCancelButton: true,
+        confirmButtonText: 'Sim, remover!',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            fetch(`http://localhost:8080/api/livros/${id}`, {
+                method: 'DELETE'
+            })
+            .then(() => {
+                carregarLivros();
+                Swal.fire('Removido!', 'Livro removido com sucesso.', 'success');
+            })
+            .catch(error => {
+                console.error('Erro ao remover:', error);
+                Swal.fire('Erro!', 'Erro ao remover livro.', 'error');
+            });
+        }
+    });
+}
+  </script>
 </body>
 </html>

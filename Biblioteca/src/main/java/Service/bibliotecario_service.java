@@ -29,9 +29,13 @@ public class bibliotecario_service {
         bibliotecario_repository.deleteById(id);
     }
 
-    public bibliotecario_model atualizar(Long id, bibliotecario_model bibliotecario_model) {
-        bibliotecario_model.setId(id);
-        return bibliotecario_repository.save(bibliotecario_model);
+   public bibliotecario_model atualizar(Long id, bibliotecario_model bibliotecario) {
+        if (bibliotecario_repository.existsById(id)) {
+            bibliotecario.setId(id);
+            return bibliotecario_repository.save(bibliotecario);
+        } else {
+            throw new RuntimeException("Bibliotecário não encontrado com ID: " + id);
+        }
     }
 }
 
