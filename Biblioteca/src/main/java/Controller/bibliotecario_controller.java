@@ -1,4 +1,5 @@
 package Controller;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,36 +17,30 @@ import Model.bibliotecario_model;
 import Service.bibliotecario_service;
 
 @RestController
-@RequestMapping("/bibliotecario")
-@CrossOrigin(
-    origins = "*"
-)
-
-class bibliotecario_controller {
+@RequestMapping("/api/bibliotecario")
+@CrossOrigin(origins = "*")
+public class bibliotecario_controller {
 
     @Autowired
-    private bibliotecario_service biliotecario_service;
-
-
+    private bibliotecario_service bibliotecarioService;
 
     @PostMapping
-    public bibliotecario_model adicionar(@RequestBody bibliotecario_model bibliotecario_model) {
-        return biliotecario_service.salvar(bibliotecario_model);
+    public bibliotecario_model adicionar(@RequestBody bibliotecario_model bibliotecario) {
+        return bibliotecarioService.salvar(bibliotecario);
     }
 
     @GetMapping
     public List<bibliotecario_model> listar() {
-        return biliotecario_service.listar();
+        return bibliotecarioService.listar();
     }
 
     @DeleteMapping("/{id}")
     public void remover(@PathVariable Long id) {
-        biliotecario_service.remover(id);
+        bibliotecarioService.remover(id);
     }
 
     @PutMapping("/{id}")
-    public bibliotecario_model atualizar(@PathVariable Long id, @RequestBody bibliotecario_model bibliotecario_model) {
-        return biliotecario_service.atualizar(id, bibliotecario_model);
+    public bibliotecario_model atualizar(@PathVariable Long id, @RequestBody bibliotecario_model bibliotecario) {
+        return bibliotecarioService.atualizar(id, bibliotecario);
     }
-    
 }
